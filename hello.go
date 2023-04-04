@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
 )
 
@@ -24,8 +25,8 @@ func main() {
 	//comando := receiveCommand()
 
 	//use _ to ignore 1 return var
-	name, age := showNameAge()
-	fmt.Println(name, age)
+	// name, age := showNameAge()
+	// fmt.Println(name, age)
 
 	switch receiveCommand() {
 	case 1:
@@ -42,11 +43,11 @@ func main() {
 }
 
 // return 2 values
-func showNameAge() (string, int) {
-	name := "Renan"
-	age := 20
-	return name, age
-}
+// func showNameAge() (string, int) {
+// 	name := "Renan"
+// 	age := 20
+// 	return name, age
+// }
 
 func showIntrodution() {
 	//variables
@@ -82,7 +83,11 @@ func receiveCommand() int {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	//site := "https://github.com/RenanLMenezes"
-	//resp, error := http.Get(site)
-
+	site := "https://random-status-code.herokuapp.com/"
+	res, _ := http.Get(site)
+	if res.StatusCode == 200 {
+		fmt.Println(site, "Success", res.StatusCode)
+	} else {
+		fmt.Println(site, "Error", res.StatusCode)
+	}
 }
