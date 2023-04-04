@@ -8,38 +8,40 @@ import (
 
 func main() {
 
-	//showIntrodution()
+	showIntrodution()
+	for {
 
-	//showMenu()
+		showMenu()
 
-	// if command == 1 {
-	// 	fmt.Println("Monitoring...")
-	// } else if command == 2 {
-	// 	fmt.Println("Showing Logs...")
-	// } else if command == 0 {
-	// 	fmt.Println("Bye bye...")
-	// } else {
-	// 	fmt.Println("Choose a valid option")
-	// }
+		// if command == 1 {
+		// 	fmt.Println("Monitoring...")
+		// } else if command == 2 {
+		// 	fmt.Println("Showing Logs...")
+		// } else if command == 0 {
+		// 	fmt.Println("Bye bye...")
+		// } else {
+		// 	fmt.Println("Choose a valid option")
+		// }
 
-	//comando := receiveCommand()
+		//comando := receiveCommand()
 
-	//use _ to ignore 1 return var
-	// name, age := showNameAge()
-	// fmt.Println(name, age)
+		//use _ to ignore 1 return var
+		// name, age := showNameAge()
+		// fmt.Println(name, age)
 
-	switch receiveCommand() {
-	case 1:
-		startMonitoring()
-	case 2:
-		fmt.Println("Showing Logs...")
-	case 0:
-		fmt.Println("Bye bye...")
-		os.Exit(0)
-	default:
-		fmt.Println("Choose a valid option")
-		os.Exit(-1)
+		switch receiveCommand() {
+		case 1:
+			startMonitoring()
+		case 2:
+			fmt.Println("Showing Logs...")
+		case 0:
+			fmt.Println("Bye bye...")
+			os.Exit(0)
+		default:
+			fmt.Println("Choose a valid option")
+		}
 	}
+
 }
 
 // return 2 values
@@ -83,7 +85,7 @@ func receiveCommand() int {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	site := "https://random-status-code.herokuapp.com/"
+	site := "https://github.com/RenanLMenezes"
 	res, _ := http.Get(site)
 	if res.StatusCode == 200 {
 		fmt.Println(site, "Success", res.StatusCode)
