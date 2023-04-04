@@ -7,9 +7,9 @@ import (
 
 func main() {
 
-	showIntrodution()
+	//showIntrodution()
 
-	showMenu()
+	//showMenu()
 
 	// if command == 1 {
 	// 	fmt.Println("Monitoring...")
@@ -23,9 +23,13 @@ func main() {
 
 	//comando := receiveCommand()
 
+	//use _ to ignore 1 return var
+	name, age := showNameAge()
+	fmt.Println(name, age)
+
 	switch receiveCommand() {
 	case 1:
-		fmt.Println("Monitoring...")
+		startMonitoring()
 	case 2:
 		fmt.Println("Showing Logs...")
 	case 0:
@@ -35,6 +39,13 @@ func main() {
 		fmt.Println("Choose a valid option")
 		os.Exit(-1)
 	}
+}
+
+// return 2 values
+func showNameAge() (string, int) {
+	name := "Renan"
+	age := 20
+	return name, age
 }
 
 func showIntrodution() {
@@ -67,4 +78,11 @@ func receiveCommand() int {
 	//fmt.Println("The address of command is", &command) //var address
 
 	return command
+}
+
+func startMonitoring() {
+	fmt.Println("Monitoring...")
+	//site := "https://github.com/RenanLMenezes"
+	//resp, error := http.Get(site)
+
 }
