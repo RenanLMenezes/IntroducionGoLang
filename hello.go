@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"net/http"
 	"os"
 )
 
@@ -85,11 +84,16 @@ func receiveCommand() int {
 
 func startMonitoring() {
 	fmt.Println("Monitoring...")
-	site := "https://github.com/RenanLMenezes"
-	res, _ := http.Get(site)
-	if res.StatusCode == 200 {
-		fmt.Println(site, "Success", res.StatusCode)
-	} else {
-		fmt.Println(site, "Error", res.StatusCode)
-	}
+	// array
+	// var sites [3]string
+	// sites[0] = "https://github.com/RenanLMenezes"
+	// slice
+	sites := []string{"https://github.com/RenanLMenezes", "https://supergeeks.com.br", "https://www.youtube.com"}
+	fmt.Println(len(sites), cap(sites)) //  show the length of the slide | capacity
+	// res, _ := http.Get(site)
+	// if res.StatusCode == 200 {
+	// 	fmt.Println(site, "Success", res.StatusCode)
+	// } else {
+	// 	fmt.Println(site, "Error", res.StatusCode)
+	// }
 }
