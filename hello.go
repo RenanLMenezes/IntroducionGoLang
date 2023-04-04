@@ -2,8 +2,12 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 	"os"
+	"time"
 )
+
+const delay = 3
 
 func main() {
 
@@ -89,11 +93,24 @@ func startMonitoring() {
 	// sites[0] = "https://github.com/RenanLMenezes"
 	// slice
 	sites := []string{"https://github.com/RenanLMenezes", "https://supergeeks.com.br", "https://www.youtube.com"}
-	fmt.Println(len(sites), cap(sites)) //  show the length of the slide | capacity
-	// res, _ := http.Get(site)
-	// if res.StatusCode == 200 {
-	// 	fmt.Println(site, "Success", res.StatusCode)
-	// } else {
-	// 	fmt.Println(site, "Error", res.StatusCode)
-	// }
+	//fmt.Println(len(sites), cap(sites)) //  show the length of the slide | capacity
+	for i := 0; i < 3; i++ {
+		//for i := 0; i < len(sites); i++
+		for i, site := range sites {
+			fmt.Println("Index", i, "Site:", site)
+			testSite(site)
+
+		}
+		time.Sleep(delay * time.Second)
+	}
+
+}
+
+func testSite(site string) {
+	res, _ := http.Get(site)
+	if res.StatusCode == 200 {
+		fmt.Println(site, "Success", res.StatusCode)
+	} else {
+		fmt.Println(site, "Error", res.StatusCode)
+	}
 }
