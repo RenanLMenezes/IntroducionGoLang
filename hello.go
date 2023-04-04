@@ -29,15 +29,26 @@ func main() {
 	fmt.Scan(&command) // or Scanf("%d", &commando)
 
 	fmt.Println("The command is", command)
-	fmt.Println("The address of command is", &command) //var address
+	//fmt.Println("The address of command is", &command) //var address
 
-	if command == 1 {
+	// if command == 1 {
+	// 	fmt.Println("Monitoring...")
+	// } else if command == 2 {
+	// 	fmt.Println("Showing Logs...")
+	// } else if command == 0 {
+	// 	fmt.Println("Bye bye...")
+	// } else {
+	// 	fmt.Println("Choose a valid option")
+	// }
+
+	switch command {
+	case 1:
 		fmt.Println("Monitoring...")
-	} else if command == 2 {
+	case 2:
 		fmt.Println("Showing Logs...")
-	} else if command == 0 {
-		fmt.Println("Bye bye...")
-	} else {
+	case 0:
+		fmt.Println("Choose a valid option")
+	default:
 		fmt.Println("Choose a valid option")
 	}
 }
