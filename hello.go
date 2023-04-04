@@ -30,4 +30,14 @@ func main() {
 
 	fmt.Println("The command is", command)
 	fmt.Println("The address of command is", &command) //var address
+
+	if command == 1 {
+		fmt.Println("Monitoring...")
+	} else if command == 2 {
+		fmt.Println("Showing Logs...")
+	} else if command == 0 {
+		fmt.Println("Bye bye...")
+	} else {
+		fmt.Println("Choose a valid option")
+	}
 }
