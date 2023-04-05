@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -40,6 +41,7 @@ func main() {
 			startMonitoring()
 		case 2:
 			fmt.Println("Showing Logs...")
+			printLog()
 		case 0:
 			fmt.Println("Bye bye...")
 			os.Exit(0)
@@ -64,7 +66,7 @@ func showIntrodution() {
 	// u can u := instead var and without the type
 	name := "Renan" //var name string
 	//var age = 20      // if u don't initialize the variable the value is 0 ou null | var age int
-	var version = 0.2 // var version float32 || float64
+	var version = 0.7 // var version float32 || float64
 
 	//print
 	fmt.Println("Hello World! And", name)
@@ -118,8 +120,10 @@ func testSite(site string) {
 
 	if res.StatusCode == 200 {
 		fmt.Println(site, "Success", res.StatusCode)
+		writeLog(site, true)
 	} else {
 		fmt.Println(site, "Error", res.StatusCode)
+		writeLog(site, false)
 	}
 }
 
@@ -150,4 +154,26 @@ func readFile() []string {
 	file.Close()
 
 	return sites
+}
+
+func writeLog(site string, status bool) {
+	file, err := os.OpenFile("log.txt", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+
+	if err != nil {
+		fmt.Println("Erro:", err)
+	}
+
+	file.WriteString(time.Now().Format("02/01/2006 15:04:05") + " - " + site + " - Online :" + strconv.FormatBool(status) + "\n")
+
+	file.Close()
+}
+
+func printLog() {
+	file, err := os.ReadFile("log.txt")
+
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	println(string(file))
 }
