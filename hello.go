@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -92,14 +95,14 @@ func startMonitoring() {
 	// var sites [3]string
 	// sites[0] = "https://github.com/RenanLMenezes"
 	// slice
-	sites := []string{"https://github.com/RenanLMenezes", "https://supergeeks.com.br", "https://www.youtube.com"}
-	//fmt.Println(len(sites), cap(sites)) //  show the length of the slide | capacity
+	//sites := []string{"https://github.com/RenanLMenezes", "https://supergeeks.com.br", "https://www.youtube.com"}
+	//fmt.Println(len(sites), cap(sites)) //  show the length of the slide | capacity7
+	sites := readFile()
 	for i := 0; i < 3; i++ {
 		//for i := 0; i < len(sites); i++
 		for i, site := range sites {
 			fmt.Println("Index", i, "Site:", site)
 			testSite(site)
-
 		}
 		time.Sleep(delay * time.Second)
 	}
@@ -107,10 +110,44 @@ func startMonitoring() {
 }
 
 func testSite(site string) {
-	res, _ := http.Get(site)
+	res, err := http.Get(site)
+
+	if err != nil {
+		fmt.Println("Erro:", nil)
+	}
+
 	if res.StatusCode == 200 {
 		fmt.Println(site, "Success", res.StatusCode)
 	} else {
 		fmt.Println(site, "Error", res.StatusCode)
 	}
+}
+
+func readFile() []string {
+	var sites []string
+
+	file, err := os.Open("sites.txt")
+
+	if err != nil {
+		fmt.Println("Erro:", nil)
+	}
+
+	reader := bufio.NewReader(file)
+
+	for {
+
+		line, err := reader.ReadString('\n')
+		line = strings.TrimSpace(line)
+
+		sites = append(sites, line)
+
+		if err == io.EOF {
+			break
+		}
+
+	}
+
+	file.Close()
+
+	return sites
 }
